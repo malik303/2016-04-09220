@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html itemscope="" itemtype="http://schema.org/QAPage"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<title>Connecting to github using PuTTY generated SSH key in Windows 7 - Super User</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/superuser/img/favicon.ico?v=29b26120d2c5">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/superuser/img/apple-touch-icon.png?v=0ad5b7a83e49">
+    <link rel="search" type="application/opensearchdescription+xml" title="Super User" href="https://superuser.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@super_user">
+    <meta name="twitter:domain" content="superuser.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/superuser/img/apple-touch-icon@2.png?v=e869e4459439">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Connecting to github using PuTTY generated SSH key in Windows 7">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="On an otherwise pristine Windows 7 Enterprise install:
+Install PuTTY 0.62
+Create public/private key pair with puttygen.exe
+Add public key for pasting into OpenSSH authorized_keys to github account...">
+    <meta property="og:url" content="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7">
+    <link rel="canonical" href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7">
+
+    
+    
+    <script type="text/javascript" async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/ados"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/quant.js"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/beacon.js"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/analytics.js"></script><script type="text/javascript" async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/ados.js"></script><script src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/jquery.js"></script>
+    <script src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question 'Connecting to github using PuTTY generated SSH key in Windows 7'" href="https://superuser.com/feeds/question/378354">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#BEB013',backgroundColor:'#FFF',questionId:378354});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('3', '378354');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', false); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.ready(function () {
+                        StackExchange.realtime.init('wss://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToReputationNotifications('3');
+                StackExchange.realtime.subscribeToTopBarNotifications('3');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1497085891,"routeName":"Questions/Show","site":{"name":"Super User","description":"Q&A for computer enthusiasts and power users","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LcDNwYAAAAAAG_X1rC8kTtLBP6XS2Ym1N0n9kSY","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":3,"enableInsertDocLinkDialog":false,"childUrl":"https://meta.superuser.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"80caca0e0325f45abd1fbfbf26530a86","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"ab":{"devstory_timeline_exp":{"v":"new_add_item_interaction","g":2},"devstory_onboarding_exp":{"v":"subscribe_to_match_emails","g":2}}},"realtime":{"newest":true,"active":true,"tagged":true,"staleDisconnectIntervalInHours":0,"workerIframeDomain":"https://cdn.sstatic.net"},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"28f84aeaeedf","js/moderator.en.js":"278559024c1d","js/full-anon.en.js":"4efd1bc185ca","js/full.en.js":"80b158c49ee5","js/wmd.en.js":"d2beb9061b73","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"ba2685451c38","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"8c8d95583787","js/tageditornew.en.js":"975b734c34de","js/inline-tag-editing.en.js":"ff9d6e1cd996","js/revisions.en.js":"47de10a8358f","js/review.en.js":"c5385cc3963b","js/tagsuggestions.en.js":"b278f9a0b23b","js/post-validation.en.js":"d367adf99e99","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"f140dc959895","js/keyboard-shortcuts.en.js":"7be523c1b948","js/external-editor.en.js":"6a457b30531d","js/adops.en.js":"9a6a7812a212"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css"><style type="text/css">body,.so-header{margin-top:1.9em}</style></noscript>
+<script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/full-anon.js"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/post-validation.js"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/prettify-full.js"></script><script async="" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/external-editor.js"></script><script type="text/javascript" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/adFeedback.js"></script><link rel="stylesheet" href="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/adFeedback.css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://superuser.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+                    <a href="https://chat.stackexchange.com/?tab=site&amp;host=superuser.com" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="https://superuser.com/" class="current-site-link site-link js-gps-track" data-id="3" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-superuser" title="Super User"></div>
+        Super User
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.superuser.com/" class="site-link js-gps-track" data-id="77" data-gps-track="site.switch({ target_site:77, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-superusermeta" title="Meta Super User"></div>
+        Meta Super User
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://superuser.com/users/signup?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://superuser.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+        </div>
+
+        <div class="network-items">
+                <a href="https://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 168 Stack Exchange sites">
+                    <span class="hidden-text">Stack Exchange</span>
+                </a>
+
+    <a href="#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="#" class="topbar-icon icon-achievements yes-hover js-achievements-button" data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://superuser.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7" class="login-link" rel="nofollow">sign up</a>
+                                <a href="https://superuser.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7" class="login-link" rel="nofollow">log in</a>
+
+                            <a href="https://superuser.com/tour">tour</a>
+        <a href="#" class="icon-help js-help-button" title="Help Center and other resources">
+            help
+            <span class="triangle"></span>
+        </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://superuser.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://superuser.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.superuser.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                                            </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="/search" method="get" autocomplete="off" role="search">
+                        <input name="q" placeholder="Search Q&amp;A" tabindex="1" autocomplete="off" maxlength="240" type="text">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+            <div id="header">
+                <br class="cbt">
+                <div id="hlogo">
+                    <a href="https://superuser.com/" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                        Super User
+                    </a>
+                </div>
+                <div id="hmenus">
+                        <div class="nav mainnavs" role="navigation" aria-label="site navigation">
+                            <ul>
+                                    <li class="youarehere">
+        <a id="nav-questions" href="https://superuser.com/questions" class="js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+        Questions
+        </a>
+    </li>
+
+                                                                    <li>
+        <a id="nav-tags" href="https://superuser.com/tags" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+        Tags
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-users" href="https://superuser.com/users" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+        Users
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-badges" href="https://superuser.com/help/badges" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:4})">
+        Badges
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-unanswered" href="https://superuser.com/unanswered" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:5})">
+        Unanswered
+        </a>
+    </li>
+                            </ul>
+                        </div>
+                    <div class="nav askquestion" role="navigation" aria-label="ask new question">
+                        <ul>
+                            <li>
+                                <a id="nav-askquestion" href="https://superuser.com/questions/ask">Ask Question</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <div id="content">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/superuser/img/apple-touch-icon.png?v=0ad5b7a83e49">
+
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Super User is a question and answer site for computer 
+enthusiasts and power users. Join them; it only takes a minute:
+            <br>
+            <br>
+            <a href="https://superuser.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Here's how it works:</b>
+            <ol id="hiw">
+                <li id="q">
+                    Anybody can ask a question
+                </li>
+                <li id="an">
+                    Anybody can answer
+                </li>
+                <li id="b">
+                    The best answers are voted up and rise to the top
+                </li>
+            </ol>
+        </div>
+    <div style="clear: both"></div>
+    </div>
+</div><script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7" class="question-hyperlink">Connecting to github using PuTTY generated SSH key in Windows 7</a></h1>
+
+            
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="378354" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22, 0, "adzerk9526869", 4).enableDynamicSiteSelection().setZone(29); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk9526869"><a href="https://engine.adzerk.net/r?e=eyJhdiI6OTE0OTQsImF0Ijo0LCJidCI6MCwiY20iOjU4OTg2MywiY2giOjE2NTMxLCJjayI6e30sImNyIjoxOTQxMzg5LCJkaSI6Ijk0Nzc4OGEyOTA0ODRiZThiZjUwYmY3Njk0YzE2ZWMzIiwiZG0iOjEsImZjIjo1NDk1NzA2LCJmbCI6NTY0ODQwMiwiaXAiOiI0MS44Ni4xNjguMjI5Iiwia3ciOiJ3aW5kb3dzLTcsc3NoLGdpdCxwdXR0eSxnaXRodWIiLCJudyI6MjIsInBjIjowLCJlYyI6MCwicHIiOjY0ODcyLCJydCI6MiwicmYiOiJodHRwczovL3d3dy5nb29nbGUuY29tLyIsInNhIjoiMyIsInNiIjoiaS0wOTc4MWNiOWY1NTllYzg4YyIsInNwIjoyMDEyMywic3QiOjg0NzYsInRyIjp0cnVlLCJ1ayI6InVlMS1lODk3MWEzZTk2OTI0ZTU5YTI0MzRjMWI3NmMxM2NjZCIsInpuIjoyOSwidHMiOjE0OTcwODU4OTI0MjMsImJmIjp0cnVlLCJwbiI6ImFkemVyazk1MjY4NjkiLCJ1ciI6Imh0dHBzOi8vYXBwLnJlZGlzbGFicy5jb20vP3V0bV9zb3VyY2U9U3RhY2tPdmVyZmxvdyZ1dG1fY2FtcGFpZ249Q2xvdWQlMjBTaWdudXAmdXRtX21lZGl1bT1CYW5uZXIjL3NpZ24tdXAvdGFicy9yZWRpcy1jbG91ZD9wcm9kdWN0PXJlZGlzLWNsb3VkIn0&amp;s=uazp4yB4FtM6GHwy3_QPpqn9Rvs" rel="nofollow" target="_blank" title=""><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/478028b345e240ba8573027b6981f6b3.png" title="" alt="" height="90" border="0" width="728"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li><li><label><input value="16" name="downvoteReason" type="radio">Other</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img style="position:absolute;" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/i.gif" height="0px" border="0" width="0px"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="378354" type="hidden">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">16</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="#">favorite</a>
+        <div class="favoritecount"><b>11</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>On an otherwise pristine Windows 7 Enterprise install:</p>
+
+<ol>
+<li>Install PuTTY 0.62</li>
+<li>Create public/private key pair with puttygen.exe</li>
+<li>Add public key for pasting into OpenSSH authorized_keys to github account</li>
+<li>Add private key to pageant</li>
+<li>Install msysgit 1.7.8 with the following options:
+
+<ul>
+<li>Use Git from Windows Command Prompt</li>
+<li>Use (Tortoise)Plink pointed to correct plink.exe</li>
+</ul></li>
+<li>Make sure github fingerprint is added to know_hosts by connecting to github.com in PuTTY and accepting fingerprint</li>
+<li><p>Edit <code>~/.ssh/config</code> to read:</p>
+
+<pre><code>Host github.com
+    User git
+    Hostname github.com
+    PreferredAuthentications publickey
+    IdentityFile ~\.ssh\github.ppk
+</code></pre></li>
+</ol>
+
+<p><code>ssh -vvvT git@github.com</code> gives: <a href="http://pastebin.com/Tu3Fc6nJ" rel="nofollow noreferrer">http://pastebin.com/Tu3Fc6nJ</a>. Note that I'm being prompted for the pass-phrase despite it being successfully loaded into pageant.</p>
+
+<p>I've tried: <code>chmod 700 ~/.ssh; chmod 600 ~/.ssh/*</code> from within Git Bash but there was no effect as verified by <code>ls -l</code>.</p>
+
+<p>I should note that I had this exact setup working on a previous Windows 7 install. Everything is identical as far as I can tell.</p>
+
+<p>What does work is generating keys from within Git Bash. However, I 
+cannot add those keys into pageant, which is a huge pain. In effect, it 
+seems that any attempt to use keys generated by PuTTY is unsucessful.</p>
+
+<p>Any insight on what's preventing this from working based on the logs? Thanks in advance.</p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://superuser.com/questions/tagged/windows-7" class="post-tag js-gps-track" title="show questions tagged 'windows-7'" rel="tag">windows-7</a> <a href="https://superuser.com/questions/tagged/ssh" class="post-tag js-gps-track" title="show questions tagged 'ssh'" rel="tag">ssh</a> <a href="https://superuser.com/questions/tagged/git" class="post-tag js-gps-track" title="show questions tagged 'git'" rel="tag">git</a> <a href="https://superuser.com/questions/tagged/putty" class="post-tag js-gps-track" title="show questions tagged 'putty'" rel="tag">putty</a> <a href="https://superuser.com/questions/tagged/github" class="post-tag js-gps-track" title="show questions tagged 'github'" rel="tag">github</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://superuser.com/q/378354" title="short permalink to this question" class="short-link" id="link-post-378354">share</a><span class="lsep">|</span><a href="https://superuser.com/posts/378354/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://superuser.com/posts/378354/revisions" title="show all edits to this post">edited <span title="2012-01-14 16:49:57Z" class="relativetime">Jan 14 '12 at 16:49</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/1686/grawity"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/7003e967f47003bae82966aa373de8ef.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/1686/grawity">grawity</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 175,779" dir="ltr">176k</span><span title="22 gold badges"><span class="badge1"></span><span class="badgecount">22</span></span><span title="338 silver badges"><span class="badge2"></span><span class="badgecount">338</span></span><span title="417 bronze badges"><span class="badge3"></span><span class="badgecount">417</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2012-01-14 15:55:34Z" class="relativetime">Jan 14 '12 at 15:55</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/45871/radu"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/e0185eff108d5c75f7d1f822edf8aab7.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/45871/radu">Radu</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">219</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-378354" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-424521" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">with -vT, please, less verbosity level</span>
+                    –&nbsp;<a href="https://superuser.com/users/99868/lazy-badger" title="3,399 reputation" class="comment-user">Lazy Badger</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424521_378354"><span title="2012-01-14 16:30:36Z" class="relativetime-clean">Jan 14 '12 at 16:30</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-378354" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+                                <span style="display:none;" itemprop="answerCount">3</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="378369"></a>
+<div id="answer-378369" class="answer accepted-answer" data-answerid="378369" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="378369" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">16</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>You are confusing two entirely separate programs: PuTTY and OpenSSH.</p>
+
+<ul>
+<li><p><code>plink</code> and Pageant are part of PuTTY. The <code>ssh</code> command is part of OpenSSH. It is unclear which program is being used by Git; you need to check the <code>%GIT_SSH%</code> environment variable for that.</p></li>
+<li><p>The programs use different agent protocols; OpenSSH cannot use PuTTY's Pageant; it has its own <code>ssh-agent</code> (which unfortunately is somewhat complicated to use on Windows).</p></li>
+<li><p>PuTTY and <code>plink</code> store the session settings in registry, editable in PuTTY's interface. They do not use anything in <code>~/.ssh/</code>; this directory is only used by OpenSSH.</p></li>
+<li><p>The private key formats used by OpenSSH and PuTTY are different; you cannot use a <code>.ppk</code> key with OpenSSH. If you generated the key in PuTTYgen, you have to use its "Export → OpenSSH" command.</p>
+
+<pre><code>$ ssh -vvvT git@github.com
+OpenSSH_4.6p1, OpenSSL 0.9.8e 23 Feb 2007
+...
+debug2: key_type_from_name: unknown key type 'PuTTY-User-Key-File-2:'
+</code></pre></li>
+</ul>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://superuser.com/a/378369" title="short permalink to this answer" class="short-link" id="link-post-378369">share</a><span class="lsep">|</span><a href="https://superuser.com/posts/378369/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-01-14 16:47:56Z" class="relativetime">Jan 14 '12 at 16:47</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/1686/grawity"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/7003e967f47003bae82966aa373de8ef.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/1686/grawity">grawity</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 175,779" dir="ltr">176k</span><span title="22 gold badges"><span class="badge1"></span><span class="badgecount">22</span></span><span title="338 silver badges"><span class="badge2"></span><span class="badgecount">338</span></span><span title="417 bronze badges"><span class="badge3"></span><span class="badgecount">417</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-378369" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="1" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-424960" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I am aware of the difference 
+and as indicated in the original post, git has been set to use plink 
+when installed. I have verified that this has changed the proper 
+environment variable to point to plink.exe. I'd like to use PuTTY keys 
+(and this has worked in the past!) with git, and the fact that its not 
+working despite plink being used is weird...</span>
+                    –&nbsp;<a href="https://superuser.com/users/45871/radu" title="219 reputation" class="comment-user owner">Radu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424960_378369"><span title="2012-01-15 20:46:46Z" class="relativetime-clean">Jan 15 '12 at 20:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-424962" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Essentially, right now I can 
+get it to work with OpenSSH keys, but not with PuTTY keys. I have tried 
+reinstalling PuTTY and also generating new keys. TThat doesn't seem to 
+be problem. Any idea what it could be?</span>
+                    –&nbsp;<a href="https://superuser.com/users/45871/radu" title="219 reputation" class="comment-user owner">Radu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424962_378369"><span title="2012-01-15 20:48:29Z" class="relativetime-clean">Jan 15 '12 at 20:48</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-424966" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Radu: <b><code>plink</code> does not support OpenSSH key format.</b> If your version does, then it's not <code>plink</code> you are using; it's something else.</span>
+                    –&nbsp;<a href="https://superuser.com/users/1686/grawity" title="175,779 reputation" class="comment-user">grawity</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424966_378369"><span title="2012-01-15 20:56:29Z" class="relativetime-clean">Jan 15 '12 at 20:56</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-424990" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Radu: Also, the original 
+post indicates the opposite of your claim. First you generate a key with
+ PuTTYgen and load it to Pageant, but <i>then</i> you go with configuring OpenSSH and complain that "<code>ssh</code> prompts for pass-phrase despite being loaded into Pageant". You <i>are</i> confusing the two programs.</span>
+                    –&nbsp;<a href="https://superuser.com/users/1686/grawity" title="175,779 reputation" class="comment-user">grawity</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424990_378369"><span title="2012-01-15 21:53:38Z" class="relativetime-clean">Jan 15 '12 at 21:53</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-425146" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I never said that plink 
+supports OpenSSH - Git Bash, however, does, since by default it uses 
+OpenSSH. Reading back, you are correct, I have been confusing things 
+since as you said, <code>~/.ssh/config</code> is not used by PuTTY. 
+However, I'd like to reiterate that GIT_SSH is pointed to plink, and yet
+ if I modify the ssh config file for OpenSSH the changes are reflected 
+in Git Bash when attempting to connect to github. Essentially, I believe
+ that the GIT_SSH environment variable is being ignored and I suppose 
+it's something specific to my OS. I'll try on a fresh image tomorrow.</span>
+                    –&nbsp;<a href="https://superuser.com/users/45871/radu" title="219 reputation" class="comment-user owner">Radu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment425146_378369"><span title="2012-01-16 05:49:08Z" class="relativetime-clean">Jan 16 '12 at 5:49</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-378369" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="#" onclick="">show <b>1</b> more comment</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22, 0, "adzerk25099421", 4).enableDynamicSiteSelection().setZone(30); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk25099421"><a href="https://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjo0NzE1MDMsImNoIjoxNjUzMSwiY2siOnt9LCJjciI6MTYzOTA0MSwiZGkiOiIzMTUwZTQzNDI0MTk0Y2IxYmIwMzg0ZWEwMTVmNjdkNiIsImRtIjoxLCJmYyI6MTk0MzUxMiwiZmwiOjIxNDIzMjcsImlwIjoiNDEuODYuMTY4LjIyOSIsImt3Ijoid2luZG93cy03LHNzaCxnaXQscHV0dHksZ2l0aHViIiwibnciOjIyLCJwYyI6MCwiZWMiOjAsInByIjo1NzIyMiwicnQiOjEsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8iLCJzYSI6IjMiLCJzYiI6ImktMDk3ODFjYjlmNTU5ZWM4OGMiLCJzcCI6MjAxMjMsInN0Ijo4NDc2LCJ1ayI6InVlMS1lODk3MWEzZTk2OTI0ZTU5YTI0MzRjMWI3NmMxM2NjZCIsInpuIjozMCwidHMiOjE0OTcwODU4OTI0MjYsImJmIjp0cnVlLCJwbiI6ImFkemVyazI1MDk5NDIxIiwidXIiOiJodHRwOi8vc3RhY2tvdmVyZmxvdy5jb20vam9icz91dG1fc291cmNlPXdlYnNpdGUmdXRtX21lZGl1bT1iYW5uZXImdXRtX2NvbnRlbnQ9bGVhZGVyYm9hcmRfOCZ1dG1fY2FtcGFpZ249aG91c2VfYWRzX2hvdXNlX2Fkc19ST1NfU1UifQ&amp;s=kysSFaKts1itJ2BKMeYyw6Gr6gc" rel="nofollow" target="_blank" title=""><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/3cc4c68b64604449a5f3910ca6f16b1e.png" title="" alt="" height="90" border="0" width="728"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li><li><label><input value="16" name="downvoteReason" type="radio">Other</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img style="position:absolute;" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/i_003.gif" height="0px" border="0" width="0px"></div>
+  
+<a name="1011413"></a>
+<div id="answer-1011413" class="answer" data-answerid="1011413" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="1011413" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">12</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I have put together a step-by-step guide to get Git setup for windows using PuTTY's Plink application for SSH authentication.</p>
+
+<p>Follow along below:</p>
+
+<hr>
+
+<h1>Setup</h1>
+
+<ol>
+<li><p>Install <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/putty.zip" rel="nofollow noreferrer">putty.zip</a> which is available at the <a href="http://www.chiark.greenend.org.uk/%7Esgtatham/putty/download.html" rel="nofollow noreferrer">PuTTY Download Page</a> or you can download individually.</p>
+
+<ul>
+<li><p><strong>PuTTY:</strong> <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/putty.exe" rel="nofollow noreferrer">putty.exe</a> (or by <a href="ftp://ftp.chiark.greenend.org.uk/users/sgtatham/putty-latest/x86/putty.exe" rel="nofollow noreferrer">FTP</a>)</p>
+
+<p>The SSH and Telnet client itself.</p></li>
+<li><p><strong>Plink:</strong> <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/plink.exe" rel="nofollow noreferrer">plink.exe</a> (or by <a href="ftp://ftp.chiark.greenend.org.uk/users/sgtatham/putty-latest/x86/plink.exe" rel="nofollow noreferrer">FTP</a>)</p>
+
+<p>A command-line interface to the PuTTY back ends.</p></li>
+<li><p><strong>Pageant:</strong> <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/pageant.exe" rel="nofollow noreferrer">pageant.exe</a> (or by <a href="ftp://ftp.chiark.greenend.org.uk/users/sgtatham/putty-latest/x86/pageant.exe" rel="nofollow noreferrer">FTP</a>)</p>
+
+<p>An SSH authentication agent for PuTTY, PSCP, PSFTP, and Plink.</p></li>
+<li><p><strong>PuTTYgen:</strong> <a href="http://the.earth.li/%7Esgtatham/putty/latest/x86/puttygen.exe" rel="nofollow noreferrer">puttygen.exe</a> (or by <a href="ftp://ftp.chiark.greenend.org.uk/users/sgtatham/putty-latest/x86/puttygen.exe" rel="nofollow noreferrer">FTP</a>)</p>
+
+<p>An RSA and DSA key generation utility.</p></li>
+</ul></li>
+<li><p>Generate RSA and PPK Keys</p>
+
+<ol>
+<li>Using the Git Bash, use <code>ssh-keygen</code> to generate a pair of RSA public/private keys. More information on how to do this can be found on the official <a href="https://help.github.com/articles/generating-ssh-keys/" rel="nofollow noreferrer">Generating SSH keys</a> article.</li>
+<li>In PuTTYgen, import your existing <code>~/.ssh/id_rsa</code> (private) key, via <kbd>Conversions</kbd> → <kbd>Import key</kbd>.</li>
+<li>Save the imported key via the <kbd>Save private key</kbd> button as <code>~/.ssh/id_rsa.ppk</code>.</li>
+<li><p>You should now have the following keys in your <code>~/.ssh</code> directory:</p>
+
+<ul>
+<li><strong><em><code>id_rsa</code>:</em></strong> Private (OpenSSH) RSA key</li>
+<li><strong><em><code>id_rsa.pub</code>:</em></strong> Public (OpenSSH) RSA key</li>
+<li><strong><em><code>id_rsa.ppk</code>:</em></strong> Private (PuTTY) key</li>
+</ul></li>
+</ol></li>
+<li><p>Install <a href="https://git-scm.com/download/win" rel="nofollow noreferrer">Git for Windows</a>. </p>
+
+<p>Make sure that you choose to use Plink.</p>
+
+<p><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/YNYBz.png" alt="Git setup"></p>
+
+<p><strong>Note:</strong> If you have already installed Git, you can just run the installer again and set Plink to be your default SSH application.</p></li>
+<li><p>Set your Environment paths.</p>
+
+<ol>
+<li>In <em>Control Panel</em>, navigate to the System view.</li>
+<li>Choose <em>Advanced system settings</em>.</li>
+<li>In the <em>System Properties</em> window, click the <em>Advanced</em> tab.</li>
+<li>Click <kbd>Environment variables…</kbd>.</li>
+<li><p>Add the following <em>System variables</em> (if not already set):</p>
+
+<ul>
+<li><strong><em><code>GIT_HOME</code>:</em></strong> <code>C:\Program Files\Git</code></li>
+<li><strong><em><code>GIT_SSH</code>:</em></strong> <code>C:\Program Files (x86)\PuTTY\plink.exe</code></li>
+</ul></li>
+<li><p>Append the Git binary directory to the system path.</p>
+
+<ul>
+<li><strong><em><code>Path</code>:</em></strong> <code>%Path%;%GIT_HOME%\bin</code></li>
+</ul></li>
+</ol></li>
+<li><p>Open Pageant and load the ppk key located at <code>~/.ssh/id_rsa.ppk</code>.</p>
+
+<p><strong>Note:</strong> Once Pageant has started, you can click on its icon in the system tray located in the taskbar, next to the time, on the right.</p></li>
+<li><p>Open Putty and connect to test your connection via SSH and add the server's key as a known host.</p>
+
+<p><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/4LUib.png" alt="Putty"></p>
+
+<p>Examples hostnames:</p>
+
+<ul>
+<li><strong>GitHub:</strong> <code>git@github.com:22</code> (or via ssh-agent <code>ssh -Tv git@github.com</code>)</li>
+<li><strong>BitBucket:</strong> <code>git@bitbucket.org:22</code> (or via ssh-agent <code>ssh -Tv git@bitbucket.org</code>)</li>
+</ul></li>
+<li><p>Start Git Bash.</p>
+
+<p>You should be able to push and pull from your remote host without entering a password each time.</p></li>
+</ol>
+
+<hr>
+
+<h1>Shortcut</h1>
+
+<p>You can place a shortcut in your startup directory to auto-load your key each time you log into your Windows account.</p>
+
+<h2>Via Batch Script</h2>
+
+<p>This idea was inspired by an answer to this question:</p>
+
+<blockquote>
+  <p><a href="https://superuser.com/a/392082/192355">Super User: How to make a shortcut from CMD?</a>.</p>
+</blockquote>
+
+<pre class="lang-vbs prettyprint prettyprinted" style=""><code><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="com">REM | Pageant Autoload.bat                                             |</span><span class="pln">
+</span><span class="com">REM |                                                                  |</span><span class="pln">
+</span><span class="com">REM | This script creates a shortcut for auto-loading a PPK (key) in   |</span><span class="pln">
+</span><span class="com">REM | Pageant by writing a temporary VB script and executing it. The   |</span><span class="pln">
+</span><span class="com">REM | following information below is added to the shortcut.            |</span><span class="pln">
+</span><span class="com">REM |                                                                  |</span><span class="pln">
+</span><span class="com">REM | Filename  : Pageant Autoload                                     |</span><span class="pln">
+</span><span class="com">REM | Target    : pageant.exe                                          |</span><span class="pln">
+</span><span class="com">REM | Arguments : id_rsa.ppk                                           |</span><span class="pln">
+</span><span class="com">REM | Start in  : ~/.ssh                                               |</span><span class="pln">
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="pun">@</span><span class="pln">echo off
+
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="com">REM | Global Values - Do not touch these!                              |</span><span class="pln">
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="kwd">SET</span><span class="pln"> VBSCRIPT</span><span class="pun">=</span><span class="str">"%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%.vbs"</span><span class="pln">
+</span><span class="kwd">SET</span><span class="pln"> STARTUP_DIR</span><span class="pun">=</span><span class="pln">Microsoft</span><span class="pun">\</span><span class="pln">Windows</span><span class="pun">\</span><span class="pln">Start Menu</span><span class="pun">\</span><span class="pln">Programs</span><span class="pun">\</span><span class="pln">Startup
+</span><span class="kwd">SET</span><span class="pln"> STARTUP_USER_DIR</span><span class="pun">=%</span><span class="pln">APPDATA</span><span class="pun">%\%</span><span class="pln">STARTUP_DIR</span><span class="pun">%</span><span class="pln">
+</span><span class="kwd">SET</span><span class="pln"> STARTUP_ALL_USERS_DIR</span><span class="pun">=%</span><span class="pln">PROGRAMDATA</span><span class="pun">%\%</span><span class="pln">STARTUP_DIR</span><span class="pun">%</span><span class="pln"> </span><span class="com">REM Alternative</span><span class="pln">
+
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="com">REM | Shortcut Values - You can change these to whatever you want.     |</span><span class="pln">
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="kwd">SET</span><span class="pln"> FILENAME</span><span class="pun">=</span><span class="pln">Pageant Autoload</span><span class="pun">.</span><span class="pln">lnk
+</span><span class="kwd">SET</span><span class="pln"> TARGET</span><span class="pun">=%</span><span class="pln">PROGRAMFILES</span><span class="pun">(</span><span class="pln">x86</span><span class="pun">)%\</span><span class="pln">PuTTY</span><span class="pun">\</span><span class="pln">pageant</span><span class="pun">.</span><span class="pln">exe
+</span><span class="kwd">SET</span><span class="pln"> ARGUMENTS</span><span class="pun">=</span><span class="pln">id_rsa</span><span class="pun">.</span><span class="pln">ppk
+</span><span class="kwd">SET</span><span class="pln"> START_IN</span><span class="pun">=%%</span><span class="pln">USERPROFILE</span><span class="pun">%%\.</span><span class="pln">ssh
+</span><span class="kwd">SET</span><span class="pln"> DESCRIPTION</span><span class="pun">=</span><span class="pln">Autoload PuTTY key </span><span class="kwd">with</span><span class="pln"> Pageant </span><span class="kwd">on</span><span class="pln"> startup </span><span class="pun">(</span><span class="pln">Ctrl</span><span class="pun">+</span><span class="pln">Alt</span><span class="pun">+</span><span class="pln">S</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">SET</span><span class="pln"> HOTKEY</span><span class="pun">=</span><span class="pln">CTRL</span><span class="pun">+</span><span class="pln">ALT</span><span class="pun">+</span><span class="pln">S
+
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+</span><span class="com">REM | Write a new VB script, on the fly; execute and delete it.        |</span><span class="pln">
+</span><span class="com">REM |==================================================================|</span><span class="pln">
+ECHO </span><span class="kwd">Set</span><span class="pln"> oWS </span><span class="pun">=</span><span class="pln"> WScript</span><span class="pun">.</span><span class="pln">CreateObject</span><span class="pun">(</span><span class="str">"WScript.Shell"</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO sLinkFile </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%STARTUP_USER_DIR%\%FILENAME%"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO </span><span class="kwd">Set</span><span class="pln"> oLink </span><span class="pun">=</span><span class="pln"> oWS</span><span class="pun">.</span><span class="pln">CreateShortcut</span><span class="pun">(</span><span class="pln">sLinkFile</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">TargetPath </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%TARGET%"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">Arguments </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%ARGUMENTS%"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">WorkingDirectory </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%START_IN%"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">Description </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%DESCRIPTION%"</span><span class="pln">  </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">HotKey </span><span class="pun">=</span><span class="pln"> </span><span class="str">"%HOTKEY%"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+ECHO oLink</span><span class="pun">.</span><span class="pln">Save </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+CScript </span><span class="pun">//</span><span class="pln">Nologo </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln">
+DEL </span><span class="pun">%</span><span class="pln">VBSCRIPT</span><span class="pun">%</span><span class="pln"> </span><span class="pun">/</span><span class="pln">f </span><span class="pun">/</span><span class="pln">q</span></code></pre>
+
+<h2>Via Windows Explorer</h2>
+
+<ol>
+<li><p>Navigate to the startup directory in Windows Explorer.</p>
+
+<ul>
+<li><p>User <code>Startup/</code> directory (preferred) is located at:</p>
+
+<pre><code>%AppData%\Microsoft\Windows\Start Menu\Programs\Startup
+</code></pre></li>
+<li><p>All Users <code>Startup/</code> directory is located at:</p>
+
+<pre><code>%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup
+</code></pre></li>
+</ul></li>
+<li><p>Right-click inside the folder and select <kbd>New</kbd> → <kbd>Shortcut</kbd></p></li>
+<li><p>In the <em>Create Shortcut</em> dialog, enter the following information.</p>
+
+<ul>
+<li><strong><em>Location:</em></strong> <code>"C:\Program Files (x86)\PuTTY\pageant.exe"</code></li>
+<li><strong><em>Name:</em></strong> <code>Pageant Autoload</code></li>
+</ul></li>
+<li><p>Right-click the new shortcut and choose <kbd>Properties</kbd> from the context menu.</p></li>
+<li><p>Modify the following fields under the <em>Shortcut</em> tab:</p>
+
+<ul>
+<li><strong><em>Target:</em></strong> <code>"%PROGRAMFILES(x86)%\PuTTY\pageant.exe" id_rsa.ppk</code></li>
+<li><strong><em>Start in:</em></strong> <code>%USERPROFILE%\.ssh</code></li>
+</ul>
+
+<p>&nbsp;<br>
+Notes:</p>
+
+<ol>
+<li><p>If you are using a 32-bit Windows OS, you should use the <code>%PROGRAMFILES%</code> environment variable instead of <code>%PROGRAMFILES(x86)%</code>.</p></li>
+<li><p>If you placed your shortcut in the All Users startup directory, make sure that the current user has an <code>id_rsa.ppk</code> key in their <code>~/.ssh</code> directory or the key will not auto-load.</p></li>
+</ol></li>
+</ol>
+
+<hr>
+
+<h1>Closing Remarks</h1>
+
+<p>There you have it. Next time you log into your Windows profile, you 
+will be greeted with a Pageant prompt to enter the password for your 
+key. If you did not set a password on your key, then your key should be 
+loaded automatically without a prompt.</p>
+
+<p>If you are not sure if your key loaded view the current keys in Pageant by selecting <strong>View Keys</strong> from the context menu for Pageant in the system tray.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://superuser.com/a/1011413" title="short permalink to this answer" class="short-link" id="link-post-1011413">share</a><span class="lsep">|</span><a href="https://superuser.com/posts/1011413/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://superuser.com/posts/1011413/revisions" title="show all edits to this post">edited <span title="2017-03-20 10:04:38Z" class="relativetime">Mar 20 at 10:04</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/-1/community"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/a007be5a61f6aa8f3e85ae2fc18dd66e.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/-1/community">Community</a><span class="mod-flair" title="moderator">♦</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-12-10 03:03:02Z" class="relativetime">Dec 10 '15 at 3:03</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/192355/mr-polywhirl"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/20969bd926bb6a29ee19a07a25f7fea8.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/192355/mr-polywhirl">Mr. Polywhirl</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">257</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1011413" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-1404246" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">3</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Great detailed instructions! +1 from me!</span>
+                    –&nbsp;<a href="https://superuser.com/users/510662/mcdonalds" title="12,619 reputation" class="comment-user">McDonald's</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment1404246_1011413"><span title="2015-12-13 01:40:39Z" class="relativetime-clean">Dec 13 '15 at 1:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-1617356" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Importing the private key in puttygen was my missing link</span>
+                    –&nbsp;<a href="https://superuser.com/users/37292/saurabh-kumar" title="101 reputation" class="comment-user">Saurabh Kumar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment1617356_1011413"><span title="2016-09-28 16:36:09Z" class="relativetime-clean">Sep 28 '16 at 16:36</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-1011413" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="378361"></a>
+<div id="answer-378361" class="answer" data-answerid="378361" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="378361" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>In plain English</p>
+
+<blockquote>
+  <p>debug3: Not a RSA1 key file /c/Users/Radu/\.ssh\github.ppk.</p>
+  
+  <p>debug2: key_type_from_name: unknown key type 'PuTTY-User-Key-File-2</p>
+</blockquote>
+
+<p>Puttygen can build different of keys, Github wants SSH1-RSA (?, I <strong>use</strong> ssh2 keys with Pageant on github)</p>
+
+<p><strong>Adds</strong></p>
+
+<p>See also this <a href="http://false.ekta.is/2010/05/putty-pageant-git-and-github-key-problems/" rel="nofollow noreferrer">post about debugging pageant</a> issues with Github </p>
+
+<pre><code>&gt;plink.exe -v -agent git@github.com
+Looking up host "github.com"
+Connecting to 207.97.227.239 port 22
+Server version: SSH-2.0-OpenSSH_5.1p1 Debian-5github2
+Using SSH protocol version 2
+We claim version: SSH-2.0-PuTTY_Release_0.62
+Doing Diffie-Hellman group exchange
+Doing Diffie-Hellman key exchange with hash SHA-256
+Host key fingerprint is:
+ssh-rsa 2048 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
+Initialised AES-256 SDCTR client-&gt;server encryption
+Initialised HMAC-SHA1 client-&gt;server MAC algorithm
+Initialised AES-256 SDCTR server-&gt;client encryption
+Initialised HMAC-SHA1 server-&gt;client MAC algorithm
+Pageant is running. Requesting keys.
+Pageant has 1 SSH-2 keys
+Using username "git".
+Trying Pageant key #0
+Remote debug message: Forced command: gerve lazybadger
+Remote debug message: Port forwarding disabled.
+Remote debug message: X11 forwarding disabled.
+Remote debug message: Agent forwarding disabled.
+Remote debug message: Pty allocation disabled.
+Authenticating with public key "github/lazybadger" from agent
+Sending Pageant's response
+Remote debug message: Forced command: gerve lazybadger
+Remote debug message: Port forwarding disabled.
+Remote debug message: X11 forwarding disabled.
+Remote debug message: Agent forwarding disabled.
+Remote debug message: Pty allocation disabled.
+Access granted
+Opened channel for session
+Server refused to allocate pty
+Started a shell/command
+Hi lazybadger! You've successfully authenticated, but GitHub does not provide shell access.
+Server sent command exit status 1
+Disconnected: All channels closed
+</code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://superuser.com/a/378361" title="short permalink to this answer" class="short-link" id="link-post-378361">share</a><span class="lsep">|</span><a href="https://superuser.com/posts/378361/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://superuser.com/posts/378361/revisions" title="show all edits to this post">edited <span title="2012-01-14 17:00:03Z" class="relativetime">Jan 14 '12 at 17:00</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2012-01-14 16:25:30Z" class="relativetime">Jan 14 '12 at 16:25</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://superuser.com/users/99868/lazy-badger"><div class="gravatar-wrapper-32"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/646a1d7964f88fd9296f93e96c787c0a.png" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://superuser.com/users/99868/lazy-badger">Lazy Badger</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,399</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-378361" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-424528" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">SSH1 is obsolete and has numerous security holes. Github does not use it.</span>
+                    –&nbsp;<a href="https://superuser.com/users/1686/grawity" title="175,779 reputation" class="comment-user">grawity</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment424528_378361"><span title="2012-01-14 16:43:32Z" class="relativetime-clean">Jan 14 '12 at 16:43</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-606231" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This equivalent to 'ssh -T git@github.com' is sadly missing from the github howto documentation. Thank you for posting.</span>
+                    –&nbsp;<a href="https://superuser.com/users/33104/epu" title="101 reputation" class="comment-user">Epu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment606231_378361"><span title="2012-11-16 17:35:02Z" class="relativetime-clean">Nov 16 '12 at 17:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-378361" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="/questions/378354/answer/submit" method="post" class="post-form">
+						    <input id="post-id" value="378354" type="hidden">
+                            <input id="qualityBanWarningShown" name="qualityBanWarningShown" value="false" type="hidden">
+                            <input name="referrer" value="https://www.google.com/" type="hidden">
+							<h2 class="space">Your Answer</h2>
+
+
+        
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" value="80caca0e0325f45abd1fbfbf26530a86" type="hidden">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://superuser.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input name="manual-openid" class="manual-openid" type="hidden">
+                    <input name="use-facebook" class="use-facebook" value="false" type="hidden">
+                    <input name="use-google" class="use-google" value="false" type="hidden">
+                    <input class="submit-openid" value="Submit" style="display:none" type="button">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" size="30" maxlength="30" tabindex="105" type="text">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" size="30" maxlength="100" tabindex="106" placeholder="required, but never shown" type="email">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        
+StackExchange.openid.initPostLogin('.new-post-login', 
+'https%3a%2f%2fsuperuser.com%2fquestions%2f378354%2fconnecting-to-github-using-putty-generated-ssh-key-in-windows-7%23new-answer',
+ 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" 
+type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" 
+size="30" maxlength="100" value="" tabindex="106" placeholder="required,
+ but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" value="Post Your Answer" tabindex="110" type="submit">
+									<a href="#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input name="legalLinksShown" value="1" type="hidden">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="https://superuser.com/questions/tagged/windows-7" class="post-tag" title="show questions tagged 'windows-7'" rel="tag">windows-7</a> <a href="https://superuser.com/questions/tagged/ssh" class="post-tag" title="show questions tagged 'ssh'" rel="tag">ssh</a> <a href="https://superuser.com/questions/tagged/git" class="post-tag" title="show questions tagged 'git'" rel="tag">git</a> <a href="https://superuser.com/questions/tagged/putty" class="post-tag" title="show questions tagged 'putty'" rel="tag">putty</a> <a href="https://superuser.com/questions/tagged/github" class="post-tag" title="show questions tagged 'github'" rel="tag">github</a>  or <a href="https://superuser.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2012-01-14 15:55:34Z"><b>5 years, 4 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+                                    <b>42,934 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="https://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7?lastactivity" class="lastactivity-link" title="2015-12-11 00:27:45Z">1 year, 6 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22, 0, 
+"adzerk493929321", [5,17]).enableDynamicSiteSelection().setZone(56016); 
+});
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk493929321"><div id="so_community_div" style="height: 250px; width: 300px;"><style type="text/css">
+    .ads {
+        margin-left: 60px;
+    }
+
+    .ad-container {
+        width: 300px;
+        height: 250px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+        .ad-container .ad {
+            height: 250px;
+        }
+
+        .ad-container .footer-container {
+            overflow: hidden;
+            height: 30px;
+            position: relative;
+            top: -30px;
+        }
+
+            .ad-container .footer-container .footer {
+                font-family: Arial,Helvetic,Sans-Serif;
+                font-size: 12px;
+                text-align: center;
+                padding-top: 9px;
+                background-color: #000;
+                color: #EFF;
+                opacity: 0.9;
+                filter: alpha(opacity=90);
+                top: 30px;
+                height: 30px;
+                position: relative;
+            }
+
+        .ad-container a:hover {
+            text-decoration: underline;
+        }
+
+    #adzerk2 {
+        height: 250px;
+    }
+</style>
+<script>
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, 
+true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ 
+top: "30px" }, "fast");
+            });
+    });
+    if (window._passthroughAdUrl) {
+        $('.ad-container a').each(function () { $(this).attr('href', 
+window._passthroughAdUrl + (window._passthroughAdUrl.indexOf('?') == -1 ?
+ '?' : '&') + 'url=' + encodeURIComponent($(this).attr('href'))); });
+    }
+</script>
+        <div class="ad-container">
+            <div class="ad">
+                <a href="http://meta.superuser.com/ads/ct/12076?url=http%3a%2f%2fvi.stackexchange.com&amp;s=4f0099bc188c1b4fb35293e672b5ac78a249d8b07d1a78a1583ec01be8e7ba17" rel="nofollow" target="_blank"><img src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/kXWI6.png" alt="Vi and Vim Stack Exchange" title="Vi and Vim Stack Exchange" height="250" width="300"></a>
+            </div>
+            <div class="footer-container">
+                <div class="footer" style="top: 30px;">
+                    9 votes · <a href="http://meta.superuser.com/questions/12070#12076" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.superuser.com/ads/display/12070" target="_blank">stats</a>
+                </div>
+            </div>
+        </div></div><script type="text/javascript">window._a51AdUrl = 
+"https://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NSwiYnQiOjAsImNtIjozNzM4NjIsImNoIjoxNjUzMSwiY2siOnt9LCJjciI6MzIzNzE5NiwiZGkiOiJmMDVmMDQyYzVjNTY0MDUwYjFhYmFiZWQ4MTg5ZDQwOCIsImRtIjoxLCJmYyI6NTU5ODQyNSwiZmwiOjExNzI3NzUsImlwIjoiNDEuODYuMTY4LjIyOSIsImt3Ijoid2luZG93cy03LHNzaCxnaXQscHV0dHksZ2l0aHViIiwibnciOjIyLCJwYyI6MCwiZWMiOjAsInByIjo1NTY5NSwicnQiOjEsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8iLCJzYSI6IjMiLCJzYiI6ImktMDk3ODFjYjlmNTU5ZWM4OGMiLCJzcCI6MjAxMjMsInN0Ijo4NDc2LCJ1ayI6InVlMS1lODk3MWEzZTk2OTI0ZTU5YTI0MzRjMWI3NmMxM2NjZCIsInpuIjo1NjAxNiwidHMiOjE0OTcwODU4OTI0MjksImJmIjp0cnVlLCJwbiI6ImFkemVyazQ5MzkyOTMyMSIsInVyIjpudWxsfQ&s=12VObGerhDNBS2Fkoi0tjQ6AvWQ";</script><script type="text/javascript" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/community"></script><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li><li><label><input value="16" name="downvoteReason" type="radio">Other</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img style="position:absolute;" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/i_002.gif" height="0px" border="0" width="0px"></div>
+            <div id="hireme"></div>
+        <script>
+        </script>
+			<div class="module" id="chat-feature">
+
+    <h4><a href="http://chat.stackexchange.com/" id="h-chat-link" title="69 users active in 49 rooms the last 60 minutes">69 People Chatting</a></h4>
+    <div class="related" id="ad502-rooms"><div class="ad502-room"><h3 class="ad502-room-h3"><span class="ad502-room-title" title="Root Access"><a href="http://chat.stackexchange.com/rooms/118">Root Access</a></span></h3><span title="2017-06-10 08:49:36Z" class="ad502-last-message">21 mins ago - <a href="http://chat.stackexchange.com/users/146966">Rahul2001</a></span><br><div class="ad502-users"><a href="http://chat.stackexchange.com/users/146966"><img title="Rahul2001: 21 mins ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/MOPu7.png" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/10208"><img title="Journeyman Geek: 56 mins ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/e88cb2b3858ca0df735806f1a8476b23.jpg" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/35822"><img title="Bob: 1 hour ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/082d6a8bed92991450502419bdf5d420.png" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/7257"><img title="Faheem Mitha: 2 hours ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/2b37134235e21817f74cd8c47eb0538d.png" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/24463"><img title="jokerdino: 3 hours ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/8bfa3d624cdb4f087d8d8ffcaf786315.jpg" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/149840"><img title="Not Dog: 8 hours ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/49woU.png" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/128113"><img title="Avery: 13 hours ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/243sp.jpg" height="23" width="23"></a></div></div><div class="ad502-room"><h3 class="ad502-room-h3"><span class="ad502-room-title" title="Ask a Super User Moderator"><a href="http://chat.stackexchange.com/rooms/114">Ask a Super User Moderator</a></span></h3><span title="2017-06-10 07:17:36Z" class="ad502-last-message">1 hour ago - <a href="http://chat.stackexchange.com/users/11606">bwDraco</a></span><br><div class="ad502-users"><a href="http://chat.stackexchange.com/users/10208"><img title="Journeyman Geek: 2 hours ago" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/e88cb2b3858ca0df735806f1a8476b23.jpg" height="23" width="23"></a><a href="http://chat.stackexchange.com/users/133966"><img title="DavidPostill: May 29 at 20:48" src="Connecting%20to%20github%20using%20PuTTY%20generated%20SSH%20key%20in%20Windows%207%20-%20Super%20User_files/mUKdg.jpg" height="23" width="23"></a></div></div></div>
+    <script>
+    // <!--
+        StackExchange.ready(
+        function () {
+            var options = {
+                chatUrl: 'http://chat.stackexchange.com',
+                reloadUrl: '/api/recent-chat',
+                preloadData: 
+{"activeUsers":69,"activeRooms":49,"rooms":[{"name":"Root 
+Access","id":118,"lastPost":1497084576,"posts":1496289,"users":[{"name":"Rahul2001","id":146966,"emailhash":"!https://i.stack.imgur.com/MOPu7.png?s=128\u0026g=1","lastPost":1497084576},{"name":"Journeyman
+ 
+Geek","id":10208,"emailhash":"e88cb2b3858ca0df735806f1a8476b23","lastPost":1497082519},{"name":"Bob","id":35822,"emailhash":"082d6a8bed92991450502419bdf5d420","lastPost":1497081641},{"name":"Faheem
+ 
+Mitha","id":7257,"emailhash":"2b37134235e21817f74cd8c47eb0538d","lastPost":1497078157},{"name":"jokerdino","id":24463,"emailhash":"8bfa3d624cdb4f087d8d8ffcaf786315","lastPost":1497073275},{"name":"Not
+ 
+Dog","id":149840,"emailhash":"!https://i.stack.imgur.com/49woU.png?s=128\u0026g=1","lastPost":1497055727},{"name":"Avery","id":128113,"emailhash":"!https://i.stack.imgur.com/243sp.jpg?s=128\u0026g=1","lastPost":1497035683}],"messages":[{"date":1497084576,"user":"Rahul2001","userid":146966}],"singleImage":false,"tags":["computers","redacted"]},{"name":"Ask
+ a Super User 
+Moderator","id":114,"lastPost":1497079056,"posts":18326,"users":[{"name":"Journeyman
+ 
+Geek","id":10208,"emailhash":"e88cb2b3858ca0df735806f1a8476b23","lastPost":1497078326},{"name":"DavidPostill","id":133966,"emailhash":"!https://i.stack.imgur.com/mUKdg.jpg?s=128\u0026g=1","lastPost":1496080122}],"messages":[{"date":1497079056,"user":"bwDraco","userid":11606}],"singleImage":false,"tags":[]}]}
+ 
+            };
+
+            StackExchange.chatAd.init(options);
+        });
+    // -->
+    </script>
+
+</div>
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="https://superuser.com/q/392061?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">56</div>
+	</a>
+	<a href="https://superuser.com/questions/392061/how-to-make-a-shortcut-from-cmd?noredirect=1&amp;lq=1" class="question-hyperlink">How to make a shortcut from CMD?</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://superuser.com/q/196021?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://superuser.com/questions/196021/git-1-7-3-using-windonws-putty-ssh-problem?rq=1" class="question-hyperlink">git 1.7.3 using windonws + putty + ssh problem</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/357602?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">5</div></a><a href="https://superuser.com/questions/357602/use-a-specified-key-from-ssh-agent?rq=1" class="question-hyperlink">Use a specified key from ssh-agent</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/407809?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://superuser.com/questions/407809/ssh-github-cant-connect?rq=1" class="question-hyperlink">SSH Github can't connect</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/590204?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://superuser.com/questions/590204/ubuntu-confused-ssh-keys-connecting-to-github?rq=1" class="question-hyperlink">Ubuntu confused ssh keys connecting to github</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/660803?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://superuser.com/questions/660803/ssh-does-not-try-to-provide-private-keys-for-github-over-ssh?rq=1" class="question-hyperlink">ssh does not try to provide private keys for github over ssh</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/686256?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">6</div></a><a href="https://superuser.com/questions/686256/how-to-set-up-ssh-auth-with-windows-git-tortoisegit-putty-synology?rq=1" class="question-hyperlink">How to set up SSH auth with Windows/git/tortoisegit/putty/Synology</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/867555?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">-1</div></a><a href="https://superuser.com/questions/867555/generate-an-ssh-key-for-all-users?rq=1" class="question-hyperlink">generate an ssh key for all users</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/916901?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://superuser.com/questions/916901/ssh-private-and-public-key-creation-and-setup?rq=1" class="question-hyperlink">SSH private and public key creation and setup</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/971732?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">2</div></a><a href="https://superuser.com/questions/971732/how-do-i-undo-an-ssh-add-on-a-forwarded-identity-to-access-github?rq=1" class="question-hyperlink">How do I undo an ssh-add on a forwarded identity to access github?</a></div><div class="spacer js-gps-track"><a href="https://superuser.com/q/1165983?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://superuser.com/questions/1165983/ssh-key-error-with-xwin-32-but-not-putty?rq=1" class="question-hyperlink">ssh key error with XWin-32 but not PuTTY</a></div>
+                    </div>
+				</div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/309568/using-cpu-heat-to-generate-electricity" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Using CPU heat to generate electricity
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/374130/how-to-make-a-label-in-a-square-in-tikz" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to make a label in a square in TikZ?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="https://movies.stackexchange.com/questions/74476/why-is-edward-in-a-white-limousine-at-the-end-of-the-film" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is Edward in a white limousine at the end of the film?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2316742/creating-a-series-that-skips-every-n-terms" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Creating a series that skips every n terms?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-hinduism" title="Hinduism Stack Exchange"></div><a href="https://hinduism.stackexchange.com/questions/18812/fourth-br%c3%a2hmana-what-is-the-sanskrit-word-for-seized" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:567 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Fourth Brâhmana - what is the Sanskrit word for "seized"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-dsp" title="Signal Processing Stack Exchange"></div><a href="https://dsp.stackexchange.com/questions/41558/what-are-some-of-the-differences-between-dft-and-fft-that-make-fft-so-fast" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:295 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are some of the differences between DFT and FFT that make FFT so fast?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2316939/prove-with-sequence" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Prove with sequence
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/161340/looking-for-a-short-story-about-a-man-who-is-visiting-a-planet-where-you-get-you" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Looking for a short story about a man who is 
+visiting a planet where you get your position/job through playing a game
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/161326/why-dont-the-forces-of-thranduil-and-dain-aid-gondor-in-the-battle-of-the-pelen" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why don't the forces of Thranduil and Dain aid Gondor in the Battle of the Pelennor Fields?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gamedev" title="Game Development Stack Exchange"></div><a href="https://gamedev.stackexchange.com/questions/142028/why-do-game-studios-need-graphics-programmers-if-theyre-using-game-engines" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:53 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do game studios need graphics programmers if they're using game engines?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/125117/diagonal-alphabet" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Diagonal Alphabet
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/161403/attacker-circumventing-2fa-how-to-defend" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Attacker circumventing 2FA. How to defend?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="https://politics.stackexchange.com/questions/19736/what-has-trump-done-to-oppress-the-lgbt-community" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What has Trump done to oppress the LGBT+ Community?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-law" title="Law Stack Exchange"></div><a href="https://law.stackexchange.com/questions/19494/how-to-handle-questionable-legal-correspondence-not-intended-for-me" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:617 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to handle questionable legal correspondence not intended for me?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/125377/longest-run-of-a-character-in-a-string" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Longest run of a character in a string
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-softwareengineering" title="Software Engineering Stack Exchange"></div><a href="https://softwareengineering.stackexchange.com/questions/350230/am-i-too-clever-to-be-readable-by-jr-devs-too-much-functional-programming-in" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Am I too 'clever' to be readable by Jr. devs? Too much functional programming in my JS?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/80534/home-inspection-for-home-owners-insurance-revealed-damage-my-inspection-and-my-l" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Home inspection for home owners insurance revealed 
+damage my inspection and my lender's appraiser did not see
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/101237/as-a-player-i-am-approaching-a-situation-where-my-guy-syndrome-seems-inevitab" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    As a player, I am approaching a situation where "My 
+Guy" syndrome seems inevitable and almost appropriate. What can I do to 
+soften any problems?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="https://stackoverflow.com/questions/44462355/can-this-regex-be-written-more-elegantly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can this regex be written more elegantly?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/310753/do-i-have-to-install-a-game-to-keep-it-if-it-is-free-for-a-limited-time" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do I have to install a game to keep it, if it is free for a limited time?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/125282/goodbye-cruel-world" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Goodbye Cruel World!
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-bioinformatics" title="Bioinformatics Stack Exchange"></div><a href="https://bioinformatics.stackexchange.com/questions/611/what-are-the-de-facto-required-fields-in-a-sam-bam-read-group" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:676 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are the de facto required fields in a SAM/BAM read group?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/83189/widespread-propaganda-in-a-fantasy-medieval-setting" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Widespread propaganda in a fantasy medieval setting
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/125237/its-hip-to-be-square" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    It's Hip to be Square
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://superuser.com/feeds/question/378354" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/378354/ivc/05b4');});
+</script>
+<noscript>
+    <div><img src="/posts/378354/ivc/05b4" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:1 })" href="https://stackoverflow.com/company/about">about us</a>
+                        <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:2 })" href="https://superuser.com/tour">tour</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:3 })" href="https://superuser.com/help">help</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:5 })" href="https://chat.stackexchange.com/?tab=site&amp;host=superuser.com">chat</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:6 })" href="https://data.stackexchange.com/">data</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:7 })" href="https://stackexchange.com/legal">legal</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:8 })" href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:9 })" href="https://stackoverflow.com/company/work-here">work here</a>
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:10 })" href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:12 })" onclick='StackExchange.switchMobile("on")'>mobile</a>
+                    <b><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:13 })" href="https://superuser.com/contact">contact us</a></b>
+                        <b><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link:14 })" href="https://meta.superuser.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="https://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="https://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="https://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="https://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="https://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="https://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="https://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="https://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="https://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                        <li><a href="https://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="https://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="https://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="https://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="https://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="https://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="https://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="https://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="https://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="https://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="https://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="https://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="https://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="https://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="https://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="https://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="https://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="https://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="https://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="https://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="https://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="https://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="https://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="https://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="https://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="https://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="https://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="https://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="https://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="https://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="https://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="https://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="https://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="https://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="https://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="https://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="https://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="https://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="https://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="https://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="https://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="https://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="https://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="https://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="https://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="https://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="https://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="https://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="https://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="https://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="https://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.6.9.26204
+            </div>
+                </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Super User works best with JavaScript enabled
+            <img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno">
+        </div>
+    </noscript>
+<script>var 
+z=document.createElement("script");z.type="text/javascript",z.async=!0,z.src="https://static.adzerk.net/ados.js";var
+ 
+s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script>
+var ados = ados || {};
+ados.run = ados.run || [];
+
+
+ados.run.push(function () {
+    setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+    ados_setKeywords('windows-7,ssh,git,putty,github');; ados_load();
+});   
+
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || 
+function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new
+ Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = 
+g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 
+'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-3');
+                ga('set', 'dimension2', 
+'|windows-7|ssh|git|putty|github|');
+                ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + 
+'.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + 
+'.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = 
+newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i)
+ || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') 
+service =  2;
+                                    else if (service === 'Place') 
+service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', 
+function() {
+                                        
+StackExchange.gps.track('google_maps_places_api.call', { service: 
+service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+</body></html>
